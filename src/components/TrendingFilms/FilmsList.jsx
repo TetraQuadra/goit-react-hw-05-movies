@@ -49,7 +49,7 @@ function FilmsList({ movies, title, isLoaded, setLoaded }) {
                 <h2 className={styles.sectionTitle}>{title}</h2>
                 <div className={styles.moviesList}>
                     {movies.map(movie => (
-                        <NavLink state={{ from: location.pathname }} key={movie.id} to={`/movies/${movie.id}`}>
+                        <NavLink state={{ from: location.pathname + location.search }} key={movie.id} to={`/movies/${movie.id}`}>
                             <div className={styles.movieCard} >
                                 <img
                                     className={styles.moviePoster}

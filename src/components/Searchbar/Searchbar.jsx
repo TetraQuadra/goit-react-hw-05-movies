@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from 'prop-types';
 import styles from './Searchbar.module.css'
 
-const Searchbar = ({ submitQuery }) => {
+const Searchbar = ({ submitQuery, initQuery }) => {
     const [searchBar, setSearchBar] = useState("");
+
+
 
     const handleInputChange = (e) => {
         setSearchBar(e.target.value);
@@ -13,6 +15,11 @@ const Searchbar = ({ submitQuery }) => {
         e.preventDefault();
         submitQuery(searchBar);
     };
+
+    useEffect(() => {
+        setSearchBar(initQuery);
+    }, [initQuery])
+
 
     return (
         <div className={styles.Searchbar}>

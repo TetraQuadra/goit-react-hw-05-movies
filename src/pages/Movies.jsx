@@ -1,57 +1,55 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import DataFetcher from 'services/DataFetcher';
 import Searchbar from 'components/Searchbar/Searchbar';
 import FilmsList from 'components/TrendingFilms/FilmsList';
 
 function Movies() {
-    const [query, setQuery] = useState('');
+    const [searchParams, setSearchParams] = useSearchParams();
+    const [searchQuery, setSearchQuery] = useState(searchParams.get("query") || '');
     const [movies, setMovies] = useState([]);
     const [page, setPage] = useState(1);
     const [isLoaded, setLoaded] = useState(false);
 
-    const submitQuery = (text) => {
-        //in case user sends empty request
+    const submitQuery = useCallback((text) => {
         if (text === '') {
-            alert('Your request is empty')
-            return
+            alert('Your request is empty');
+            return;
         }
 
-        if (text === query) {
-            alert(`Request "${text}" already loaded`)
+        if (text === searchQuery) {
+            alert(`Request "${text}" already loaded`);
         }
-        if (text !== query) {
+        if (text !== searchQuery) {
             setMovies([]);
-            setQuery(text);
+            setSearchQuery(text);
             setPage(1);
+            setSearchParams({ query: text });
         }
-
-    };
+    }, [searchQuery, setSearchQuery, setMovies, setSearchParams]);
 
     useEffect(() => {
         const searchMovies = async () => {
-
             try {
-                if (!query) {
-                    return
+                if (!searchQuery) {
+                    return;
                 }
-                setLoaded(false)
+                setLoaded(false);
                 const dataFetcher = new DataFetcher();
-                const response = await dataFetcher.searchMovie(query, page);
+                const response = await dataFetcher.searchMovie(searchQuery, page);
                 setMovies(response.results);
             } catch (error) {
                 console.log('Error fetching movies:', error);
             }
         };
         searchMovies();
-    }, [query, page]);
+    }, [searchQuery, page]);
 
     return (
         <>
-            <Searchbar submitQuery={submitQuery} />
+            <Searchbar initQuery={searchQuery} submitQuery={submitQuery} />
             <FilmsList title={'Search for movies'} movies={movies} setLoaded={setLoaded} isLoaded={isLoaded} />
         </>
-
-
     );
 }
 
