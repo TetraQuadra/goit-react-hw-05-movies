@@ -3,7 +3,7 @@ import styles from './Reviews.module.css';
 import PropTypes from 'prop-types';
 
 Reviews.propTypes = {
-    cast: PropTypes.arrayOf(
+    reviews: PropTypes.arrayOf(
         PropTypes.object
     ).isRequired,
 };

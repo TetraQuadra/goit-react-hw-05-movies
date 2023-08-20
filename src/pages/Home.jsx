@@ -16,15 +16,12 @@ function Home() {
                 setMovies(response.results)
             } catch (error) {
                 console.log('Error fetching trending films')
-
             }
             finally {
                 setLoaded(true)
             }
         }
         fetchTrendingMovies()
-
-
     }, [])
     if (!isLoaded) {
         return (<Loader />)
