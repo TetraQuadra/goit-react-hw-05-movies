@@ -1,15 +1,39 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Reviews.module.css';
-import PropTypes from 'prop-types';
+import { useParams } from 'react-router-dom';
+import DataFetcher from 'services/DataFetcher';
+import Loader from 'components/Loader/Loader';
 
-Reviews.propTypes = {
-    reviews: PropTypes.arrayOf(
-        PropTypes.object
-    ).isRequired,
-};
-
-function Reviews({ reviews }) {
+function Reviews() {
+    const [reviews, setReviews] = useState([])
+    const [isLoaded, setLoaded] = useState(false)
+    const { id } = useParams();
     const defaultAvatar = 'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700';
+    useEffect(() => {
+
+        const fetchDataAsync = async () => {
+            try {
+                const dataFetcher = new DataFetcher();
+                const reviewsPromise = await dataFetcher.getMovieReviews(id);
+                console.log(reviewsPromise)
+                setReviews(reviewsPromise.results
+                )
+            } catch (error) {
+                setReviews(null)
+                console.log("there is no cast data")
+            }
+            finally {
+                setLoaded(true)
+            }
+        };
+        fetchDataAsync();
+    }, [id]);
+
+    if (!isLoaded) {
+        return (
+            <Loader />
+        )
+    }
 
     return (
         <div className={styles.reviewsContainer}>
