@@ -19,10 +19,34 @@
     border: 1px solid #ccc;
     padding: 10px;
     transition: transform 0.2s;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    height: 550px;
 }
 
 .movieCard:hover {
     transform: scale(1.05);
+    z-index: 2;
+}
+
+.movieCard:hover .movieOverview {
+    -webkit-line-clamp: unset;
+    /* position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 10px; */
+}
+
+.movieCard:hover .movieInfo {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 10px;
 }
 
 .moviePoster {
@@ -41,8 +65,14 @@
 }
 
 .movieOverview {
+    transition: 0.1s;
     font-style: italic;
     margin-bottom: 5px;
+    overflow: hidden;
+    text-overflow: clip;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
 }
 
 .releaseDate,
