@@ -14,7 +14,6 @@ function Home() {
                 const dataFetcher = new DataFetcher();
                 const response = await dataFetcher.getTrending()
                 setMovies(response.results)
-                console.log(response)
             } catch (error) {
                 console.log('Error fetching trending films')
 
@@ -32,7 +31,7 @@ function Home() {
     }
 
     return (
-        <FilmsList title={'Trending movies'} movies={movies} />
+        <FilmsList title={'Trending movies'} movies={movies} isLoaded={isLoaded} setLoaded={setLoaded} />
     )
 }
 
