@@ -1,0 +1,73 @@
+.castContainer {
+    margin: 20px 0;
+    padding: 40px;
+}
+
+.sectionTitle {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.castList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.actorCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.actorImage {
+    width: 100px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.noImage {
+    width: 100px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+}
+
+.actorInfo {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.actorName {
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+.character {
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.isLoading {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+
+    white-space: nowrap;
+    clip-path: inset(100%);
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+}

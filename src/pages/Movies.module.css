@@ -1,0 +1,44 @@
+/* Movies.module.css */
+.moviesContainer {
+    padding: 20px;
+}
+
+.sectionTitle {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.moviesList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.movieCard {
+    border: 1px solid #ccc;
+    padding: 10px;
+    transition: transform 0.2s;
+}
+
+.movieCard:hover {
+    transform: scale(1.05);
+}
+
+.movieImage {
+    width: 100%;
+    height: auto;
+}
+
+.movieInfo {
+    margin-top: 10px;
+}
+
+.movieTitle {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.movieOverview {
+    font-size: 14px;
+    color: #666;
+}

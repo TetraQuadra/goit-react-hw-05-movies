@@ -1,0 +1,35 @@
+.movieContainer {
+    display: flex;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.moviePoster img {
+    width: 200px;
+    height: 300px;
+    border-radius: 4px;
+    background-color: gray;
+}
+
+.movieDetails {
+    margin-left: 20px;
+}
+
+.movieTitle {
+    font-size: 24px;
+    margin: 0;
+}
+
+.movieOverview {
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+.movieInfo {
+    font-size: 14px;
+    margin: 5px 0;
+}
