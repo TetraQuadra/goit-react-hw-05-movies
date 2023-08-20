@@ -1,29 +1,34 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { NavLink, useLocation } from 'react-router-dom';
 import Loader from 'components/Loader/Loader';
 import styles from './FilmsList.module.css';
 
 FilmsList.propTypes = {
-    cast: PropTypes.arrayOf(
+    movies: PropTypes.arrayOf(
         PropTypes.object
     ).isRequired,
     title: PropTypes.string.isRequired,
+    isLoaded: PropTypes.bool.isRequired,
+    setLoaded: PropTypes.func.isRequired
 }
 
-function FilmsList({ movies, title }) {
+function FilmsList({ movies, title, isLoaded, setLoaded }) {
 
-    const [isLoading, setIsLoading] = useState(true);
     const defaultImg = 'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700';
     const location = useLocation()
 
     useEffect(() => {
+        if (movies.length < 1) {
+            setLoaded(true);
+            return
+        }
         const imageElements = document.querySelectorAll("img");
         let imagesLoaded = 0;
         const handleImageLoad = () => {
             imagesLoaded++;
             if (imagesLoaded === imageElements.length) {
-                setIsLoading(false);
+                setLoaded(true);
             }
         };
 
@@ -34,13 +39,13 @@ function FilmsList({ movies, title }) {
                 img.addEventListener("load", handleImageLoad);
             }
         });
-    }, []);
+    }, [movies, setLoaded]);
 
 
     return (
         <>
-            {isLoading && <Loader />}
-            <div className={isLoading ? styles.isLoading : styles.homeContainer}>
+            {!isLoaded && <Loader />}
+            <div className={!isLoaded ? styles.isLoading : styles.homeContainer}>
                 <h2 className={styles.sectionTitle}>{title}</h2>
                 <div className={styles.moviesList}>
                     {movies.map(movie => (
