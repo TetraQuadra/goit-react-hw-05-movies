@@ -17,6 +17,9 @@ function Cast() {
       try {
         const dataFetcher = new DataFetcher();
         const castPromise = await dataFetcher.getMovieCredits(id);
+        if (castPromise.cast.length < 1) {
+          throw new Error()
+        }
         setCast(castPromise.cast)
       } catch (error) {
         setCast(null)
@@ -40,24 +43,27 @@ function Cast() {
 
     <>
       <div className={styles.castContainer}>
-        <h2 className={styles.sectionTitle}>Cast</h2>
+
 
         {cast ?
-          <div className={styles.castList}>
-            {cast.map(actor => (
-              <div className={styles.actorCard} key={actor.id}>
-                <img
-                  className={styles.actorImage}
-                  src={actor.profile_path ? `https://image.tmdb.org/t/p/w200/${actor.profile_path}` : defaultImg}
-                  alt={actor.name}
-                />
-                <div className={styles.actorInfo}>
-                  <p className={styles.actorName}>{actor.name}</p>
-                  <p className={styles.character}>Character: {actor.character}</p>
+          <>
+            <h2 className={styles.sectionTitle}>Cast</h2>
+            <div className={styles.castList}>
+              {cast.map(actor => (
+                <div className={styles.actorCard} key={actor.id}>
+                  <img
+                    className={styles.actorImage}
+                    src={actor.profile_path ? `https://image.tmdb.org/t/p/w200/${actor.profile_path}` : defaultImg}
+                    alt={actor.name}
+                  />
+                  <div className={styles.actorInfo}>
+                    <p className={styles.actorName}>{actor.name}</p>
+                    <p className={styles.character}>Character: {actor.character}</p>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div> :
+              ))}
+            </div>
+          </> :
           <p>There is no cast info</p>
         }
 
